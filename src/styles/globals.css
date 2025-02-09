@@ -26,7 +26,7 @@
   }
 
 
-  @media (width <= 640px) {
+  @media (max-width: 640px) {
     .sale-text {
       font-size: 0.875rem;
       padding: 0.5rem;
@@ -53,8 +53,6 @@
       transform: translateY(0);
     }
   }
-
-
 
   .rocket-emoji {
     display: inline-block;
@@ -90,7 +88,6 @@
       transform: translateY(0);
     }
   }
-
 
   @keyframes shimmer {
     0% {
@@ -188,7 +185,7 @@
     border: 1px solid rgb(242 169 0 / 20%) !important;
   }
 
-  @media (width >= 768px) {
+  @media (min-width: 768px) {
     .contact-form-modal {
       max-height: 85vh !important;
       padding: 20px !important;
@@ -218,7 +215,7 @@
     background: linear-gradient(
       90deg,
       transparent,
-      color-mix(in srgb, #F2A900 10%, transparent),
+      rgb(242 169 0 / 10%),
       transparent
     );
     width: 50%;
@@ -264,12 +261,22 @@
   .gradient-text {
     color: #5841D8;
     font-family: Oxanium, sans-serif;
-    letter-spacing: 0.8em;
+    letter-spacing: 0.5em;
     font-weight: 900;
     transition: all 0.3s ease;
     cursor: pointer;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+    font-size: clamp(2rem, 8vw, 4rem);
+    padding: 0 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .gradient-text {
+      letter-spacing: 0.3em;
+      font-size: clamp(1.5rem, 6vw, 2.5rem);
+      padding: 0 0.5rem;
+    }
   }
 
   .gradient-text:hover {
@@ -279,7 +286,14 @@
       0 0 30px rgb(88 65 216 / 20%),
       0 0 40px rgb(88 65 216 / 10%);
     transform: scale(1.02) translateY(-2px);
-    letter-spacing: 0.9em;
+    letter-spacing: 0.6em;
+  }
+
+
+  @media (max-width: 640px) {
+    .gradient-text:hover {
+      letter-spacing: 0.4em;
+    }
   }
 
 
@@ -350,7 +364,7 @@
 
 
 @layer base {
-  @media (width >= 1px) {
+  @media (min-width: 1px) {
     html {
       min-width: 320px;
       zoom: 1;
