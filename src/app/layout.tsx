@@ -1,25 +1,25 @@
 import "@/styles/globals.css";
 import "@fontsource/oxanium/700.css";
 import { type Metadata } from "next";
-import { NextSeo } from 'next-seo';
 import { ThemeProvider } from "@/components/ThemeProvider";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Toast from "@/components/Toast";
+import MetaTags from "@/components/MetaTags";
 export const metadata: Metadata = {
-  metadataBase: new URL('https://monday.xyz'),
-  title: "Buy Monday.xyz – Premium Crypto Domain & Real-Time Trading Platform",
-  description: "Premium crypto domain Monday.xyz for sale. Features real-time cryptocurrency price tracking, conversion tools, and market analytics. Make an offer in crypto or fiat.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://monday.xyz'),
+  title: "Monday.xyz - Premium Crypto Domain & Trading Platform",
+  description: "Trade, convert, and stay updated with crypto prices on Monday.xyz. Premium domain for sale featuring real-time cryptocurrency tracking and conversion tools.",
   keywords: "crypto domain for sale, buy crypto domain, cryptocurrency trading platform, real-time crypto prices, crypto converter, Monday.xyz",
   openGraph: {
-    title: 'Buy Monday.xyz – Premium Crypto Domain & Trading Platform',
-    description: 'Premium crypto domain Monday.xyz for sale. Features real-time cryptocurrency price tracking and conversion tools.',
+    title: 'Monday.xyz - Premium Crypto Domain & Trading Platform',
+    description: 'Trade, convert, and stay updated with crypto prices. Premium domain featuring real-time cryptocurrency tracking.',
     url: 'https://monday.xyz',
     siteName: 'Monday.xyz',
     images: [{
-      url: "https://picsum.photos/200",
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/og-image.png`,
       width: 1200,
       height: 630,
-      alt: 'Monday.xyz - Premium Crypto Domain'
+      alt: 'Monday.xyz - Premium Crypto Domain & Trading Platform'
     }],
     locale: 'en_US',
     type: 'website'
@@ -61,6 +61,7 @@ export default function RootLayout({
       <body>
         <ErrorBoundary>
           <ThemeProvider>
+            <MetaTags />
             <Toast />
             {children}
           </ThemeProvider>

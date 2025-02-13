@@ -18,22 +18,50 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as Theme;
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.classList.toggle("dark", savedTheme === "dark");
+    // Check if window is defined (client-side)
+    if (typeof window !== 'undefined') {
+      // Get saved theme or system preference
+      const savedTheme = localStorage.getItem("theme") as Theme;
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      // Use saved theme or system preference
+      const initialTheme = savedTheme || (systemPrefersDark ? "dark" : "light");
+      
+      setTheme(initialTheme);
+      document.documentElement.classList.toggle("dark", initialTheme === "dark");
+      
+      // Listen for system theme changes
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const handleChange = (e: MediaQueryListEvent) => {
+        if (!localStorage.getItem("theme")) {
+          const newTheme = e.matches ? "dark" : "light";
+          setTheme(newTheme);
+          document.documentElement.classList.toggle("dark", newTheme === "dark");
+        }
+      };
+      
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
     }
   }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
+    
     // Update state and localStorage simultaneously
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
+    
     // Direct DOM manipulation for immediate visual feedback
     requestAnimationFrame(() => {
       document.documentElement.classList.toggle("dark", newTheme === "dark");
     });
+
+    // Add smooth transition effect
+    document.documentElement.style.setProperty('--theme-transition', 'all 0.3s ease');
+    setTimeout(() => {
+      document.documentElement.style.removeProperty('--theme-transition');
+    }, 300);
   };
 
   return (

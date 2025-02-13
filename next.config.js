@@ -19,10 +19,21 @@ const config = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  webpack: (config, { isServer }) => {
-    config.stats = "verbose";
-    return config;
+  experimental: {
+    optimizeCss: true,
+    scrollRestoration: true,
+    workerThreads: true
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  compress: true,
+  poweredByHeader: false,
+  generateEtags: true,
+  httpAgentOptions: {
+    keepAlive: true,
   },
   output: "export"
 };
+
 export default config;

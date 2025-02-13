@@ -26,7 +26,7 @@
   }
 
 
-  @media (max-width: 640px) {
+  @media (width <= 640px) {
     .sale-text {
       font-size: 0.875rem;
       padding: 0.5rem;
@@ -185,7 +185,7 @@
     border: 1px solid rgb(242 169 0 / 20%) !important;
   }
 
-  @media (min-width: 768px) {
+  @media (width >= 768px) {
     .contact-form-modal {
       max-height: 85vh !important;
       padding: 20px !important;
@@ -258,6 +258,10 @@
 
 
 
+
+
+
+
   .gradient-text {
     color: #5841D8;
     font-family: Oxanium, sans-serif;
@@ -271,13 +275,17 @@
     padding: 0 1rem;
   }
 
-  @media (max-width: 640px) {
+  @media (width <= 640px) {
     .gradient-text {
       letter-spacing: 0.3em;
       font-size: clamp(1.5rem, 6vw, 2.5rem);
       padding: 0 0.5rem;
     }
   }
+
+
+
+
 
   .gradient-text:hover {
     text-shadow: 
@@ -290,18 +298,22 @@
   }
 
 
-  @media (max-width: 640px) {
+  @media (width <= 640px) {
     .gradient-text:hover {
       letter-spacing: 0.4em;
     }
   }
 
 
+
+
+
+
   .gradient-text::after {
     content: '';
     position: absolute;
     inset: -8px;
-    background: radial-gradient(circle at center, rgb(242 169 0 / 10%), transparent);
+    background: radial-gradient(circle at center, rgb(242 169 0 / 10%) 0%, transparent 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: -1;
@@ -311,6 +323,10 @@
   .gradient-text:hover::after {
     opacity: 1;
   }
+
+
+
+
 
 
 
@@ -364,7 +380,11 @@
 
 
 @layer base {
-  @media (min-width: 1px) {
+  * {
+    transition: var(--theme-transition, none);
+  }
+  
+  @media (width >= 1px) {
     html {
       min-width: 320px;
       zoom: 1;
